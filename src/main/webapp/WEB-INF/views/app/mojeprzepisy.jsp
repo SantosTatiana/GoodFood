@@ -30,6 +30,7 @@
             </thead>
             <tbody class="text-color-lighter">
             <c:forEach items="${recipe}" var="recipe">
+
                 <tr class="d-flex">
                     <th scope="row" class="col-1">${recipe.category.name}</th>
                     <td class="col-2">

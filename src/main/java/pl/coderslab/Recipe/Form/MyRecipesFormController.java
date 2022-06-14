@@ -11,6 +11,7 @@ import pl.coderslab.Category.CategoryDao;
 import pl.coderslab.Recipe.Recipe;
 import pl.coderslab.Recipe.RecipeDao;
 import pl.coderslab.Recipe.RecipeRepository;
+import pl.coderslab.User.User;
 import pl.coderslab.User.UserDao;
 import pl.coderslab.User.UserRepository;
 
@@ -55,49 +56,26 @@ public class MyRecipesFormController {
 //    }
 
     @PostMapping("/myrecipes/add")
-    public String save(@Valid Recipe recipe, BindingResult result, Model model) {
+    public String save(@Valid Recipe recipe, BindingResult result, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("recipe", recipeDao.getList());
+        User byUsername = userRepository.findByUsername(userDetails.getUsername());
+        recipe.setUser(byUsername);
         recipeRepository.save(recipe);
+
 //        return "app/mojeprzepisy";
         return "redirect:/app/myrecipes";
     }
 
 
-
-
-
-
-
-
-
-
-
-//do dokonczenia
-
+    //wyświetlanie przepisów z pobraniem id użytkownika
     @GetMapping("/myrecipes")
     public String list(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-//        model.addAttribute("recipe", recipeRepository.findAllByUserId(userRepository.findByUsername(userDetails.getUsername()).getId()));
-        model.addAttribute("recipe", recipeDao.getList());
+        model.addAttribute("recipe", recipeRepository.findAllByUserId(userRepository.findByUsername(userDetails.getUsername()).getId()));
+//        model.addAttribute("recipe", recipeDao.getList());
 //        System.out.println(userRepository.findByUsername(userDetails.getUsername()).getId());
+        System.out.println(userDetails.getUsername());
         return "app/mojeprzepisy";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // usuwanie
@@ -114,6 +92,22 @@ public class MyRecipesFormController {
 //        return "app/edytujprzepis";
 //    }
 
+//    //edytowanie przepisu
+//    @GetMapping("/myrecipes/edit/{id}")
+//    public String edit(Model model, @PathVariable long id) {
+//        Recipe recipe = recipeRepository.getOne(id);
+//        model.addAttribute("category", categoryDao.findAll());
+//        model.addAttribute("recipe", recipe);
+//        return "app/edytujprzepis";
+//    }
+//
+//    @PostMapping("/myrecipes/edit/{id}")
+//    public String editSave(@Valid Recipe recipe, BindingResult result, Model model) {
+//        model.addAttribute("recipe", recipeDao.getList());
+//        recipeRepository.save(recipe);
+//        return "app/mojeprzepisy";
+//    }
+
     //edytowanie przepisu
     @GetMapping("/myrecipes/edit/{id}")
     public String edit(Model model, @PathVariable long id) {
@@ -124,10 +118,13 @@ public class MyRecipesFormController {
     }
 
     @PostMapping("/myrecipes/edit/{id}")
-    public String editSave(@Valid Recipe recipe, BindingResult result, Model model) {
+    public String editSave(@Valid Recipe recipe, BindingResult result, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("recipe", recipeDao.getList());
+        User byUsername = userRepository.findByUsername(userDetails.getUsername());
+        recipe.setUser(byUsername);
         recipeRepository.save(recipe);
-        return "app/mojeprzepisy";
+//        return "app/mojeprzepisy";
+        return "redirect:/app/myrecipes";
     }
 
 

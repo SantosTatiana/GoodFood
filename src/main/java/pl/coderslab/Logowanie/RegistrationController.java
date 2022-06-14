@@ -31,7 +31,7 @@ public class RegistrationController {
     @PostMapping("/user")
     public String performRegister(User user) {
         userService.saveUser(user);
-        return "redirect:/login/user";
+        return "redirect:/login";
     }
 
 

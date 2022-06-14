@@ -37,7 +37,7 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
         </a>
         <ul class="nav nounderline text-uppercase">
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="/login/user">logowanie</a>
+                <a class="nav-link color-header" href="/login">logowanie</a>
             </li>
             <li class="nav-item ml-4">
                 <a class="nav-link color-header" href="/register/user">rejestracja</a>

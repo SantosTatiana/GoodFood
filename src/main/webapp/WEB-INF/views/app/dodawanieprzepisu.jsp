@@ -14,6 +14,7 @@
 
         <form:form method="post" modelAttribute="recipe">
 
+
             <div class="mt-4 ml-4 mr-4">
                 <div class="row border-bottom border-3">
                     <div class="col"><h3 class="color-header text-uppercase">Nowy przepis</h3></div>
