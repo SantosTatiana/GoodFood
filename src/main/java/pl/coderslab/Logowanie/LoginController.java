@@ -11,7 +11,6 @@ import pl.coderslab.User.UserService;
 
 @Slf4j
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
 //    @RequestMapping(value = {"/login/user"}, method = RequestMethod.GET)
@@ -27,7 +26,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/login")
     public String login() {
         return "admin/login";
     }
